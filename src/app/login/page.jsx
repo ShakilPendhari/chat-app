@@ -8,37 +8,47 @@ import {
 } from "firebase/auth";
 import { Button, Typography, Box, TextField } from "@mui/material";
 import { auth, googleProvider } from "@/lib/firebase";
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = async () => {
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      console.log("Logged in!");
-    } catch (err) {
-      console.error(err);
-    }
-  };
+const router = useRouter();
 
-  const handleSignup = async () => {
-    try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      console.log("User created!");
-    } catch (err) {
-      console.error(err);
-    }
-  };
+const handleLogin = async () => {
+  try {
+    const userCred = await signInWithEmailAndPassword(auth, email, password);
+    const token = await userCred.user.getIdToken();
+    Cookies.set("authToken", token, { expires: 7 }); // 7 days cookie
+    router.push("/chat");
+  } catch (err) {
+    console.error(err);
+  }
+};
 
-  const handleGoogleLogin = async () => {
-    try {
-      await signInWithPopup(auth, googleProvider);
-      console.log("Google login success!");
-    } catch (err) {
-      console.error(err);
-    }
-  };
+const handleSignup = async () => {
+  try {
+    const userCred = await createUserWithEmailAndPassword(auth, email, password);
+    const token = await userCred.user.getIdToken();
+     Cookies.set("authToken", token, { expires: 7 }); // 7 days cookie
+    router.push("/chat");
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+const handleGoogleLogin = async () => {
+  try {
+    const userCred = await signInWithPopup(auth, googleProvider);
+    const token = await userCred.user.getIdToken();
+     Cookies.set("authToken", token, { expires: 7 }); // 7 days cookie
+    router.push("/chat");
+  } catch (err) {
+    console.error(err);
+  }
+};
 
   return (
     <Box
