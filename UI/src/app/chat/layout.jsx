@@ -21,7 +21,7 @@ export default function ChatLayout({ children }) {
         {/* Chat section */}
         <Box flex={1} display="flex" flexDirection="column">
           {/* Chat header */}
-          {activeChat && <ChatHeader name={"Alice"} />}
+          {activeChat !== null && <ChatHeader id={activeChat} />}
 
           {/* Chat body */}
           <Box flex={1} overflow="auto" p={2}>

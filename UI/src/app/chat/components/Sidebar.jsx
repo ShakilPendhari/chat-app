@@ -13,7 +13,7 @@ import {
   ListItemButton,
 } from "@mui/material";
 
-const dummyChats = [
+export const dummyChats = [
   { id: 1, name: "Alice", lastMessage: "See you tomorrow!", time: "10:30 AM" },
   {
     id: 2,
@@ -21,7 +21,7 @@ const dummyChats = [
     lastMessage: "New update deployed 🚀",
     time: "Yesterday",
   },
-  { id: 3, name: "Bob", lastMessage: "Let’s catch up soon!", time: "Mon" },
+  { id: 3, name: "Bob", lastMessage: "Let's catch up soon!", time: "Mon" },
 ];
 
 export default function Sidebar({ onSelectChat }) {
@@ -55,9 +55,9 @@ export default function Sidebar({ onSelectChat }) {
 
       {/* Chat list */}
       <List>
-        {filteredChats.map((chat) => (
+        {filteredChats.map((chat,index) => (
           <ListItem key={chat.id} disablePadding>
-            <ListItemButton onClick={() => onSelectChat(chat.id)}>
+            <ListItemButton onClick={() => onSelectChat(index)}>
               <ListItemAvatar>
                 <Avatar>{chat.name[0]}</Avatar>
               </ListItemAvatar>

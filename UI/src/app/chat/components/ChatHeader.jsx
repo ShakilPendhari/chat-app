@@ -2,8 +2,9 @@
 
 import { Box, Avatar, Typography, IconButton } from "@mui/material";
 import { MoreVert, Search, Call, VideoCall } from "@mui/icons-material";
+import { dummyChats } from "./Sidebar";
 
-export default function ChatHeader({ name }) {
+export default function ChatHeader({ id }) {
   return (
     <Box
       sx={{
@@ -17,9 +18,12 @@ export default function ChatHeader({ name }) {
       }}
     >
       <Box display="flex" alignItems="center">
-        <Avatar>{name[0]}</Avatar>
+      {
+        console.log("dummyChats[id].name:-->", dummyChats[id].name, id)
+      }
+        <Avatar>{dummyChats[id].name}</Avatar>
         <Box ml={2}>
-          <Typography variant="subtitle1">{name}</Typography>
+          <Typography variant="subtitle1">{dummyChats[id].name}</Typography>
           <Typography variant="caption" color="textSecondary">online</Typography>
         </Box>
       </Box>
