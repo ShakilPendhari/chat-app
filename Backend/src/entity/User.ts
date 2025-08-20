@@ -1,4 +1,4 @@
-import { Model, ObjectID, Unique, MongoosePlugin } from "@tsed/mongoose";
+import { Model, Unique, MongoosePlugin } from "@tsed/mongoose";
 import { Property, Required } from "@tsed/schema";
 import { CustomBaseEntity } from "./CustomBaseEntity.js";
 import MongooseDelete from "mongoose-delete";
@@ -12,9 +12,6 @@ import MongooseDelete from "mongoose-delete";
   overrideMethods: true,
 })
 export class User extends CustomBaseEntity {
-  @ObjectID("id")
-  _id: string;
-
   @Unique()
   @Property()
   @Required()
@@ -26,5 +23,7 @@ export class User extends CustomBaseEntity {
 
   @Property()
   displayName?: string;
+
+  @Property()
   avatarUrl?: string;
 }
